@@ -1,0 +1,65 @@
+<div>
+  <canvas id="BenchProgress"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('BenchProgress');
+
+  const benchData = [60, 65, 70, 75, 80, 85, 70, 75, 80, 90, 105, 110];
+  const squatData = [100, 105, 110, 120, 125, 130, 120, 125, 130, 140, 150, 160];
+
+  new Chart(ctx, {
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [
+        {
+          type: 'line',
+          label: '1RM Bench Press Progression (KG)',
+          data: benchData,
+          backgroundColor: 'rgb(81, 208, 46)',
+          borderColor: 'rgb(81, 208, 46)',
+          borderWidth: 1
+        },
+        {
+          type: 'bar',
+          label: '1RM Squat Progression (KG)',
+          data: squatData,
+          backgroundColor: 'rgba(255, 0, 46)',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          intersect: false
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Strength Progression Over the Year',
+          font: {
+            size: 24
+          },
+          padding: {
+            top: 10,
+            bottom: 30
+          }
+        },
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            font: {
+              size: 16
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
