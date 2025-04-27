@@ -1,0 +1,76 @@
+<canvas id="BenchProgress"></canvas>
+<button id="downloadPDF">Download as PDF</button>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- Include jsPDF library for PDF generation -->
+
+<script>
+  const ctx = document.getElementById('BenchProgress');
+
+  const benchData = [60, 65, 70, 75, 80, 85, 70, 75, 80, 90, 105, 110];
+  const squatData = [100, 105, 110, 120, 125, 130, 120, 125, 130, 140, 150, 160];
+
+  new Chart(ctx, {
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [
+        {
+          type: 'line',
+          label: '1RM Bench Press Progression (KG)',
+          data: benchData,
+          backgroundColor: 'rgba(54, 162, 235, 0.4)',
+          borderColor: 'rgba(54, 162, 235, 0.4)',
+          borderWidth: 1
+        },
+        {
+          type: 'bar',
+          label: '1RM Squat Progression (KG)',
+          data: squatData,
+          backgroundColor: 'rgba(255, 99, 132, 0.3)',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          intersect: false
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Strength Progression Over the Year',
+          font: {
+            size: 24
+          },
+          padding: {
+            top: 10,
+            bottom: 30
+          }
+        },
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            font: {
+              size: 16
+            }
+          }
+        }
+      }
+    }
+  });
+
+  document.getElementById('downloadPDF').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf; // Access jsPDF from the window object
+    const pdf = new jsPDF(); // Create a new jsPDF instance // Create a new PDF document
+
+    const canvas = document.getElementById('BenchProgress'); // Get the canvas element
+    const imgData = canvas.toDataURL('image/png', 1.0); // Convert the canvas to an image data URL
+
+    pdf.addImage(imgData, 'PNG', 10, 10, 190, 100); // Add the image to the PDF
+    pdf.save('training-packs-sales.pdf'); // Save the PDF with a specified filename
+  });
+</script>

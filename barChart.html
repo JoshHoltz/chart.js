@@ -1,63 +1,52 @@
-<div>
-  <canvas id="BenchProgress"></canvas>
-</div>
+<canvas id="TrainingPacksSales"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  const ctx = document.getElementById('BenchProgress');
+  const ctx = document.getElementById('TrainingPacksSales');
 
-  const benchData = [60, 65, 70, 75, 80, 85, 70, 75, 80, 90, 105, 110];
-  const squatData = [100, 105, 110, 120, 125, 130, 120, 125, 130, 140, 150, 160];
+    const trainingPacksData = [
+        { pack: 'Beginner', sales: 150 },
+        { pack: 'Intermediate', sales: 200 },
+        { pack: 'Advanced', sales: 250 },
+        { pack: 'Elite', sales: 300 },
+        { pack: 'How to Bench 100kg', sales: 350 },
+        { pack: 'How to Squat 200kg', sales: 400 },
+        { pack: 'How to Deadlift 300kg', sales: 450 },
+    ];
 
-  new Chart(ctx, {
-    data: {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      datasets: [
-        {
-          type: 'line',
-          label: '1RM Bench Press Progression (KG)',
-          data: benchData,
-          backgroundColor: 'rgb(81, 208, 46)',
-          borderColor: 'rgb(81, 208, 46)',
-          borderWidth: 1
-        },
-        {
-          type: 'bar',
-          label: '1RM Squat Progression (KG)',
-          data: squatData,
-          backgroundColor: 'rgba(255, 0, 46)',
-          borderWidth: 1
-        }
-      ]
+    new Chart(ctx, {
+        type: 'bar', //what type of chart are we using?
+        data: {
+            labels: trainingPacksData.map(data => data.pack), //what will the lables be?
+            datasets: [{ 
+                label: 'Sales',
+                data: trainingPacksData.map(data => data.sales),  //whats our data? where are our sales data? extracting the sales data from the trainingPacksData array
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(153, 102, 255)',
+                    'rgba(255, 159, 64)',
+                    'rgba(255, 99, 132)'
+        ],
+        borderWidth: 1
+      }]
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true,
-          intersect: false
-        }
-      },
-      plugins: {
-        title: {
-          display: true,
-          text: 'Strength Progression Over the Year',
-          font: {
-            size: 24
-          },
-          padding: {
-            top: 10,
-            bottom: 30
-          }
-        },
-        legend: {
-          display: true,
-          position: 'top',
-          labels: {
-            font: {
-              size: 16
-            }
-          }
+          beginAtZero: true
         }
       }
     }
