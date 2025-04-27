@@ -1,5 +1,8 @@
-<canvas id="BenchProgress"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<canvas id="BenchProgress" class="m-8 p-2 border border-black rounded-lg"></canvas>
 <button id="downloadPDF">Download as PDF</button>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- Include jsPDF library for PDF generation -->
@@ -74,3 +77,4 @@
     pdf.save('training-packs-sales.pdf'); // Save the PDF with a specified filename
   });
 </script>
+
